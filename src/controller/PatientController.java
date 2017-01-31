@@ -4,13 +4,13 @@ import javax.swing.JOptionPane;
 
 import constants.Hospital;
 import domain.*;
-import service.HospitalService;
-import serviceImpl.HospitalServiceImpl;
+import service.AdminService;
+import serviceImpl.AdminServiceImpl;
 
-public class Controller {
+public class PatientController {
 	
-	public void startHospital() {
-		HospitalService service = new HospitalServiceImpl();
+	public void start() {
+		AdminService service = new AdminServiceImpl();
 		DoctorBean doc = null;
 		NurseBean nur = null;
 		PatientBean pat = null;
