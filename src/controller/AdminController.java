@@ -41,6 +41,12 @@ public class AdminController {
 				JOptionPane.showMessageDialog(null, "현재 회원수는"+ service.doctorCount()+"명입니다.");
 				break;
 			case DOC_FIND_BY_ID:
+				doctor.setUid(JOptionPane.showInputDialog("ID를 입력하세요?"));
+				if(service.exist(doctor)){
+					JOptionPane.showMessageDialog(null, service.findById(doctor).toString());
+				}else{
+					JOptionPane.showMessageDialog(null, "해당하는 ID가 없습니다.");
+				}
 				break;
 			case DOC_FIND_BY_NAME:
 				break;

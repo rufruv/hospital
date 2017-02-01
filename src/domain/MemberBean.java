@@ -55,5 +55,9 @@ public class MemberBean {
 		}
 		return gender;
 	}
-	
+	@Override
+	public String toString() {
+		return String.format("%s(%s)[ %s | **** | %s | %s | %s ]", 
+				             name, ssn, uid, email, addr, phone);
+	}
 }

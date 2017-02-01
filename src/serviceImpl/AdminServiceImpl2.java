@@ -6,13 +6,13 @@ import domain.NurseBean;
 import domain.PatientBean;
 import service.AdminService;
 
-public class AdminServiceImpl implements AdminService{
+public class AdminServiceImpl2 implements AdminService{
 	private DoctorBean[] doctorList;
 	private NurseBean[] nurseList;
 	int doctorCount;
 	int nurseCount;
 	
-	public AdminServiceImpl() {
+	public AdminServiceImpl2() {
 		
 		doctorList = new DoctorBean[doctorCount];
 		nurseList = new NurseBean[nurseCount];
@@ -57,22 +57,21 @@ public class AdminServiceImpl implements AdminService{
 				}
 			nurseList[nurseCount++]= nurse;
 		}
+		
 	}
 	@Override
 	public MemberBean findById(MemberBean member) {
 		MemberBean member2 = new MemberBean();
 		if(member2 instanceof DoctorBean){
-			DoctorBean doctor = (DoctorBean)member;
 			for(int i=0;i<doctorCount;i++){
-				if(doctor.getUid().equals(doctorList[i].getUid())){
-					doctor= doctorList[i];
+				if(member2.getUid().equals(doctorList[i].getUid())){
+					member2= doctorList[i];
 				}
 			}
 		}else if(member2 instanceof NurseBean){
-			NurseBean nurse = (NurseBean) member;
 			for(int i=0;i<nurseCount;i++){
-				if(nurse.getUid().equals(nurseList[i].getUid())){
-					nurse= nurseList[i];
+				if(member2.getUid().equals(nurseList[i].getUid())){
+					member2= nurseList[i];
 				}
 			}
 		}
@@ -166,13 +165,13 @@ public class AdminServiceImpl implements AdminService{
 	public boolean exist(MemberBean member) {
 		boolean check = false;
 		if(member instanceof DoctorBean){
-			for(int i=0;i<doctorCount;i++){
+			for(int i=0; i<doctorCount; i++){
 				if(member.getUid().equals(doctorList[i].getUid())){
 					check = true;
-				}
+									}
 			}
-		}else if(member instanceof NurseBean){
-			for(int i=0;i<nurseCount;i++){
+		} else if(member instanceof NurseBean){
+			for(int i=0; i<nurseCount; i++){
 				if(member.getUid().equals(nurseList[i].getUid())){
 					check = true;
 				}
