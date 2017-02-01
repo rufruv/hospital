@@ -1,6 +1,7 @@
 package constants;
 
 public class Hospital {
+	public final static String ADMIN_MENU="0.종료 1.의사등록 11.간호사등록";
 	public final static String HOSPITAL_NAME="한빛병원";
 	public final static String DOC_SPEC = 
 			"INPUT AS 의사ID, 담당진료과목, 성명, 주민번호, 전화번호, 이메일, 직급";

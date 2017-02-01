@@ -25,12 +25,12 @@ public class DoctorBean extends MemberBean{
 	
 	@Override
 	public String toString() {
-		return String.format("의사ID: %s\n"
-							+"담당진료과목: %s\n"
-							+"성명: %s\n"
-							+"성별: %s\n"
-							+"전화번호:%s\n"
-							+"이메일: %s\n"
-							+"직급: %s\n", uid, majorTreat, name, calcGender(ssn), phone, email, docPosition);
+		return String.format("의사ID: %s"
+							+"담당진료과목: %s"
+							+"성명: %s"
+							+"성별: %s"
+							+"전화번호:%s"
+							+"이메일: %s"
+							+"직급: %s", uid, majorTreat, name, calcGender(ssn), phone, email, docPosition);
 	}
 }

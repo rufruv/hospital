@@ -3,21 +3,19 @@ package controller;
 import javax.swing.JOptionPane;
 
 import enums.ButtAdmin;
+import constants.Hospital;
 import domain.*;
 import service.AdminService;
 import serviceImpl.AdminServiceImpl;
 
-public class AdminController {
+public class AdminController2 {
 	public void start() {
 		DoctorBean doctor = null;
 		NurseBean nurse = null;
 		AdminService service = new AdminServiceImpl();
 		int i = 0;
-		ButtAdmin[] buttons = {ButtAdmin.EXIT,
-							   ButtAdmin.DOC_ADD,ButtAdmin.DOC_FIND_BY_ID,ButtAdmin.DOC_FIND_BY_NAME,ButtAdmin.DOC_LIST,
-							   ButtAdmin.DOC_UPDATE,ButtAdmin.DOC_DELETE,
-							   ButtAdmin.NUR_ADD,ButtAdmin.NUR_FIND_BY_ID,ButtAdmin.NUR_FIND_BY_NAME,ButtAdmin.NUR_LIST,
-							   ButtAdmin.NUR_UPDATE,ButtAdmin.NUR_DELETE};
+		ButtAdmin[] buttons = {ButtAdmin.EXIT,ButtAdmin.DOC_ADD,ButtAdmin.DOC_FIND_BY_ID,ButtAdmin.DOC_FIND_BY_NAME,ButtAdmin.DOC_LIST,ButtAdmin.DOC_UPDATE,ButtAdmin.DOC_DELETE,
+				ButtAdmin.NUR_ADD,ButtAdmin.NUR_FIND_BY_ID,ButtAdmin.NUR_FIND_BY_NAME,ButtAdmin.NUR_LIST,ButtAdmin.NUR_UPDATE,ButtAdmin.NUR_DELETE};
 		while (true) {
 			ButtAdmin select = (ButtAdmin)JOptionPane.showInputDialog(
 					null, // frame
@@ -26,7 +24,7 @@ public class AdminController {
 					JOptionPane.QUESTION_MESSAGE,  // type
 					null,  // icon
 					buttons, // Array of choice
-					buttons[1] // default
+					buttons[0] // default
 					);
 					
 			switch (select) {
@@ -45,16 +43,6 @@ public class AdminController {
 			case DOC_FIND_BY_NAME:
 				break;
 			case DOC_LIST:
-				if(service.doctorCount()==0){
-					JOptionPane.showMessageDialog(null, "해당의사가 존재하지 않습니다.");
-				}else{
-					DoctorBean[] docArr = service.doctorList();
-					String docListResult = "";
-					for(i=0;i<service.doctorCount();i++){
-						docListResult = docArr[i].toString()+"\n";
-					}
-					JOptionPane.showMessageDialog(null, docListResult);
-				}
 				break;
 			case DOC_UPDATE:
 				break;

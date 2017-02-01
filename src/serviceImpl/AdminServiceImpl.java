@@ -7,15 +7,16 @@ import domain.PatientBean;
 import service.AdminService;
 
 public class AdminServiceImpl implements AdminService{
-	MemberBean member;
-	DoctorBean[] doctorList;
-	NurseBean[] nurseList;
-	int count;
+	private DoctorBean[] doctorList;
+	private NurseBean[] nurseList;
+	int doctorCount;
+	int nurseCount;
 	
 	public AdminServiceImpl() {
-		doctorList = new DoctorBean[count];
-		nurseList = new NurseBean[count];
-		count=0;
+		
+		doctorList = new DoctorBean[doctorCount];
+		nurseList = new NurseBean[nurseCount];
+		doctorCount = nurseCount = 0; // 0.doctorCount 1.nurseCount
 	}
 	@Override
 	public String getBmi(PatientBean pat) {
@@ -36,35 +37,102 @@ public class AdminServiceImpl implements AdminService{
 		}
 		return bmiResult ;
 	}
+	
 	@Override
 	public void regist(MemberBean member) {
-		// TODO Auto-generated method stub
+		if(member instanceof DoctorBean){
+			DoctorBean doctor = (DoctorBean)member;
+			if(doctorCount == doctorList.length){
+				DoctorBean[] temp = new DoctorBean[doctorCount+10];
+				System.arraycopy(doctorList, 0, temp, 0, doctorCount);
+				doctorList = temp;
+				}
+			doctorList[doctorCount++]= doctor;
+		}else if(member instanceof NurseBean){
+			NurseBean nurse = (NurseBean) member;
+			if(nurseCount == nurseList.length){
+				NurseBean[] temp = new NurseBean[nurseCount+10];
+				System.arraycopy(doctorList, 0, temp, 0, nurseCount);
+				nurseList = temp;
+				}
+			nurseList[nurseCount++]= nurse;
+		}
 		
 	}
 	@Override
 	public MemberBean findById(MemberBean member) {
-		// TODO Auto-generated method stub
-		return null;
+		MemberBean member2 = new MemberBean();
+		if(member2 instanceof DoctorBean){
+			for(int i=0;i<doctorCount;i++){
+				if(member2.getUid().equals(doctorList[i].getUid())){
+					member2= doctorList[i];
+				}
+			}
+		}else if(member2 instanceof NurseBean){
+			for(int i=0;i<nurseCount;i++){
+				if(member2.getUid().equals(nurseList[i].getUid())){
+					member2= nurseList[i];
+				}
+			}
+		}
+		return member2;
 	}
 	@Override
 	public MemberBean[] findByName(MemberBean member) {
-		// TODO Auto-generated method stub
-		return null;
+		MemberBean[] memberList = new MemberBean[countByName(member)];
+		if(member instanceof DoctorBean){
+			for(int i=0;i<doctorCount;i++){
+				if(member.getUid().equals(doctorList[i].getUid())){
+					memberList[i]= doctorList[i];
+				}
+			}
+		}else if(member instanceof NurseBean){
+			for(int i=0;i<nurseCount;i++){
+				if(member.getUid().equals(nurseList[i].getUid())){
+					memberList[i]= nurseList[i];
+				}
+			}
+		}
+		return memberList;
+	}
+	@Override
+	public int countByName(MemberBean member) {
+		int nameCount = 0;
+		if(member instanceof DoctorBean){
+			for(int i=0;i<doctorCount;i++){
+				if(member.getName().equals(doctorList[i].getName())){
+					nameCount++;
+				}
+			}
+		}else if(member instanceof NurseBean){
+			for(int i=0;i<nurseCount;i++){
+				if(member.getName().equals(nurseList[i].getName())){
+					nameCount++;
+				}
+			}
+		}
+		
+		return nameCount;
 	}
 	@Override
 	public DoctorBean[] doctorList() {
-		// TODO Auto-generated method stub
-		return null;
+		return doctorList;
 	}
 	@Override
 	public NurseBean[] nurseList() {
-		// TODO Auto-generated method stub
-		return null;
+		return nurseList;
 	}
 	@Override
 	public int count() {
-		// TODO Auto-generated method stub
 		return 0;
+	}
+	@Override
+	public int doctorCount() {
+		return doctorCount;
+	}
+	@Override
+	public int nurseCount() {
+		return nurseCount;
 	}
 	@Override
 	public void change(MemberBean member) {
@@ -73,18 +141,42 @@ public class AdminServiceImpl implements AdminService{
 	}
 	@Override
 	public void remove(MemberBean member) {
-		// TODO Auto-generated method stub
-		
+		if(member instanceof DoctorBean){
+			for(int i=0;i<doctorCount;i++){
+				if(member.getUid().equals(doctorList[i].getUid())){
+					doctorList[i] = doctorList[doctorCount-1];
+					doctorList[doctorCount-1] = null;
+					doctorCount--;
+					break;
+				}
+			}
+		}else if(member instanceof NurseBean){
+			for(int i=0;i<nurseCount;i++){
+				if(member.getUid().equals(nurseList[i].getUid())){
+					nurseList[i] = nurseList[nurseCount-1];
+					nurseList[nurseCount-1] = null;
+					nurseCount--;
+					break;
+				}
+			}
+		}
 	}
 	@Override
 	public boolean exist(MemberBean member) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean check = false;
+		if(member instanceof DoctorBean){
+			for(int i=0;i<doctorCount;i++){
+				if(member.getUid().equals(doctorList[i].getUid())){
+					check = true;
+				}
+			}
+		}else if(member instanceof NurseBean){
+			for(int i=0;i<nurseCount;i++){
+				if(member.getUid().equals(nurseList[i].getUid())){
+					check = true;
+				}
+			}
+		}
+		return check;
 	}
-	@Override
-	public int countByName(MemberBean member) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
 }

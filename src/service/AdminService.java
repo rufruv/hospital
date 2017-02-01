@@ -19,6 +19,8 @@ public interface AdminService {
 	public DoctorBean[] doctorList();
 	public NurseBean[] nurseList();
 	public int count();
+	public int doctorCount();
+	public int nurseCount();
 	/**
 	 * UPDATE: UPDATE
 	 */
