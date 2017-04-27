@@ -1,6 +1,6 @@
 package domain;
 
-public class chartBean {
+public class ChartBean {
 	private String chartId, treatId, docId, patId, chartContents, chartImg;
 	
 	public void setChartId(String chartId) {
